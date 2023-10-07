@@ -6,3 +6,12 @@ chrome.tabs.query({}, function(tabs) {
         tabList.appendChild(li);
     });
 });
+
+chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
+  let tabList = document.getElementById("tabList");
+  tabs.forEach(function(tab) {
+      let li = document.createElement("li");
+      li.textContent = tab.title;
+      tabList.appendChild(li);
+  });
+});
