@@ -1,7 +1,4 @@
 document.getElementById('printButton').addEventListener('click', function () {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      var activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, { action: 'print' });
-      console.log(activeTab);
-    });
+    chrome.runtime.sendMessage({ action: 'displayMessage', message: 'I AM GOD' });
 });
+  
