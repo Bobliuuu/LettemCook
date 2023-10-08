@@ -15,3 +15,7 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
       tabList.appendChild(li);
   });
 });
+
+chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
+    chrome.tabs.remove(tabs[0].id);
+});
