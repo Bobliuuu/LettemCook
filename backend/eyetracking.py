@@ -7,9 +7,9 @@ cap = cv2.VideoCapture(-1)
 
 while True:
     res, frame = cap.read()
-    #result = DeepFace.analyze(frame,actions = ['emotion'])
-    #emotions = result['emotion']
-    #print(emotions)
+    result = DeepFace.analyze(frame,actions = ['emotion'])
+    emotions = result['emotion']
+    print(emotions)
     # Lie detection below
     """
     lie = emotions['angry'] + emotions['disgust'] + emotions['fear'] + emotions['sad']
