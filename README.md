@@ -1,5 +1,11 @@
 # StudySnitch
 
+## Kintone
+
+https://jerry2351.kintone.com/k/admin/preview/1/
+
+(View Kintone App on Demo)
+
 ## Inspiration
 
 In our digital age, time has become the ultimate luxury. With countless distractions in our lives, we strive to become the best versions of ourselves, but are bogged down by the sheer amount of distractions and issues in our lives. We wanted to create an application that would help us concentrate on our daily tasks so that we can enjoy the time we have in life to not procrastinate and stress. 
@@ -27,7 +33,3 @@ We learned about how to connect the frontend and backend, how to track data with
 ## What's next for StudySnitch
 
 In the future, StudySnitch will be improved to have even more machine learning features, better analytics, a fully gamified system, and a mobile application so it can track your phone choices as well. 
-
-[https://jerry2351.kintone.com/k/1/ ](https://jerry2351.kintone.com/k/admin/preview/1/)https://jerry2351.kintone.com/k/admin/preview/1/
-
-(View Kintone App on Demo)
