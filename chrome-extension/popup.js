@@ -1,3 +1,4 @@
+/*
 chrome.tabs.query({}, function(tabs) {
     let tabList = document.getElementById("tabList");
     tabs.forEach(function(tab) {
@@ -15,39 +16,33 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
       tabList.appendChild(li);
   });
 });
+*/
 
-const apiKey = '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';
+const apiKey = '[redact]';
 
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
     let tabList = document.getElementById("tabList");
-    tabs.forEach(function(tab) {
-        var activeTabId = tab.id;
-        let executeScriptPromise = new Promise((resolve, reject) => {
-            chrome.scripting.executeScript({
-                target: { tabId: activeTabId },
-                injectImmediately: true,
-                func: DOMtoString,
-            }, (results) => {
-                if (chrome.runtime.lastError) {
-                    reject(new Error(chrome.runtime.lastError));
-                } else {
-                    resolve(results);
-                }
-            });
-        });
-
-        executeScriptPromises.push(executeScriptPromise);
-
-        Promise.all(executeScriptPromises)
-        .then((resultsArray) => {
-            // Append each result to tabList
-            resultsArray.forEach((results) => {
-                tabList.appendChild(document.createTextNode(results));
-            });
-        })
-        .catch((error) => {
-            tabList.appendChild(document.createTextNode(error.message));
-        });
+    tabs.forEach(async function(tab) {
+        var activeTabId = tab.title;
+        await fetch(
+            `https://api.openai.com/v1/completions`,
+            {
+                body: JSON.stringify({"model": "text-davinci-003", "prompt": `Given this text, return whether it is related or not to linear algebra. It is related to linear algebra if it has the word LINEAR ALGEBRA in the title. Only return yes or no. Do not return anything else other than yes or no.\n${activeTabId}`, "temperature": 0, "max_tokens": 512}),
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: "Bearer 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",
+                },
+                    }
+        ).then((response) => {
+            if (response.ok) {
+                response.json().then((json) => {
+                    if (json['choices'][0]['text'].toLowerCase().includes("no")) {
+                        chrome.tabs.remove(tabs[0].id);
+                    }
+                });
+            }
+        }); 
     })
-    //chrome.tabs.remove(tabs[0].id);
+    //
 });

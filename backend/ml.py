@@ -5,6 +5,8 @@ import os
 import datetime
 import tts
 import random
+import redis
+
 
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -21,7 +23,7 @@ def get_voice_clip():
     audio_length = tts.get_audio_length(file_path)
     return (file_path, audio_length)
     
-
+r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
 while True:
     cur_time = datetime.datetime.now()
@@ -64,6 +66,7 @@ while True:
         elif status == 1:
             # stop attention transition
             status = 0
+            r.set('count', str(count))
             attention_transition_start = None
     
     if status == 3 and (cur_time - no_attention_transition_start).total_seconds() > 5:

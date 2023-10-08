@@ -1,23 +1,23 @@
 import streamlit as st
 import pandas as pd
 import time
+import redis
 
 # Function to simulate user actions with random durations
-def simulate_user_actions(num_actions):
+def simulate_user_actions():
     actions = []
-    for i in range(num_actions):
-        action_duration = round(2 + 3 * i + 2 * (i % 3) * (i % 2), 2)  # Adjust as needed
-        actions.append({'Action': f'Action {i+1}', 'Duration': action_duration})
-        #time.sleep(action_duration)  # Simulate user taking time for the action
+    actions.append({'Action': 'Linear Algebra', 'Duration': 3})
+    actions.append({'Action': 'Break', 'Duration': 5})
+    actions.append({'Action': 'CS Assignment', 'Duration': 2})
     return pd.DataFrame(actions)
 
 # Streamlit app
 def main():
-    st.title("Attention Tracker App")
+    r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
-    num_actions = st.slider("Number of Actions", min_value=5, max_value=30, value=10)
+    st.title("StudySnitch Analytics")
 
-    actions_df = simulate_user_actions(num_actions)
+    actions_df = simulate_user_actions()
 
     st.subheader("User Actions and Durations")
     st.table(actions_df)
@@ -25,7 +25,7 @@ def main():
     st.subheader("Graph of Action Durations")
     st.line_chart(actions_df['Duration'])
 
-    inattention_count = 3
+    inattention_count = print(r.get('bad'))
     st.info(f"User didn't pay attention {inattention_count} times.")
 
 if __name__ == "__main__":

@@ -12,8 +12,8 @@ interface RoadmapProps {
 
 // just test data, actual will call the main component
 const sampleData = {
-    title: "Cooking Roadmap",
-    actions: ["Start cooking", "Boil water", "Cut Veggies", "Drop veggies", "Plate"],
+    title: "Study Focus Time",
+    actions: ["Start Studying", "Linear Algebra", "Break", "CS assignment", "FINISH"],
     times: [0, 1, 1, 1, 1],
     urls: ["", "#", "#", "#", "#"]
 }  
@@ -78,6 +78,9 @@ const Roadmap: React.FC<RoadmapProps> = ({ title, actions, times, urls }) => {
 
                 if (actionIndex !== -1 && actionIndex < actions.length) {
                     setCurrentAction(actions[actionIndex]);
+                    // enter jerry code for tts here
+                    //var audio = new Audio('/output.mp3');
+                    //audio.play();
                 }
 
                 return newTime;
