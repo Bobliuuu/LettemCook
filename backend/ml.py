@@ -4,6 +4,7 @@ from PIL import Image
 import os
 import datetime
 import tts
+import random
 
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -13,10 +14,14 @@ cap = cv2.VideoCapture(0)
 status = 2
 last_warned = datetime.datetime.now()
 
-file_path = "output.mp3"
-ramsay_tts = tts.TTS_Request(voice="gordan_ramsay", text="Get back to work you absolute imbecile! God damn it! You stupid buffoon")
-tts.get_tts(ramsay_tts, file_path)
-audio_length = tts.get_audio_length(file_path)
+
+def get_voice_clip():
+    num = random.randint(0, 10)
+    file_path = "voice_clips/output_{}.mp3".format(num)
+    audio_length = tts.get_audio_length(file_path)
+    return (file_path, audio_length)
+    
+
 
 while True:
     cur_time = datetime.datetime.now()
@@ -40,7 +45,7 @@ while True:
             # start attention transition
             attention_transition_start = datetime.datetime.now()
             status = 1
-        elif status == 3:
+        elif w * h > 50000 and status == 3:
             # stop no attention transition
             status = 2
             no_attention_transition_start = None
@@ -72,6 +77,7 @@ while True:
         cv2.putText(img, f"{5 -(cur_time - no_attention_transition_start).total_seconds():.2f}", (30, 60), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 6)
     elif status == 0:
         cv2.putText(img, "not paying attention", (30, 60), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 6)
+        file_path, audio_length = get_voice_clip()
         if (cur_time - last_warned).total_seconds() > audio_length + 5:
             tts.play_audio(file_path)
             last_warned = cur_time
