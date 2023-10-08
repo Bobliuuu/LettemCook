@@ -10,6 +10,7 @@ interface RoadmapProps {
     urls: string[];
 }
 
+// just test data, actual will call the main component
 const sampleData = {
     title: "Cooking Roadmap",
     actions: ["Start cooking", "Boil water", "Cut Veggies", "Drop veggies", "Plate"],
