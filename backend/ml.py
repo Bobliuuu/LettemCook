@@ -14,9 +14,9 @@ cap = cv2.VideoCapture(0)
 status = 2
 last_warned = datetime.datetime.now()
 
-
+NUM_CLIPS = 20
 def get_voice_clip():
-    num = random.randint(0, 10)
+    num = random.randint(0, NUM_CLIPS)
     file_path = "voice_clips/output_{}.mp3".format(num)
     audio_length = tts.get_audio_length(file_path)
     return (file_path, audio_length)
