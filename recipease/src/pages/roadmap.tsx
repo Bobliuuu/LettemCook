@@ -30,7 +30,7 @@ const Roadmap: React.FC<RoadmapProps> = ({ title, actions, times, urls }) => {
 
     useEffect(() => {
         if (finished) {
-          router.push('/finished');
+          router.push('http://localhost:8501');
         }
       }, [finished]);
     
