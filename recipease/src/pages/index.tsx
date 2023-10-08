@@ -1,10 +1,11 @@
 import React from 'react';
 import LandingPage from './landing';
+import Roadmap from './roadmap';
 
 const Home = () => {
   return (
     <div>
-      <LandingPage />
+      <Roadmap />
     </div>
   );
 };
