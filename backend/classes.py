@@ -7,6 +7,5 @@ class Step(BaseModel):
     text: str
 
 class TTS_Request(BaseModel):
-    id: int
     voice: str
     text: str

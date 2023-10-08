@@ -1,5 +1,6 @@
-import tts
-from classes import TTS_Request
+import google_vision
+import os
 
-tts_1 = TTS_Request(id=0, voice="gordan_ramsay", text="Hello world!")
-tts.get_tts(tts_1)
+print(os.getcwd())
+
+google_vision.detect_text("backend/photos/lin_alg.png")
