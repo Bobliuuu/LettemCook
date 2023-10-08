@@ -19,6 +19,8 @@ tts.get_tts(ramsay_tts, file_path)
 audio_length = tts.get_audio_length(file_path)
 
 while True:
+    cur_time = datetime.datetime.now()
+    
     # Read the frame
     _, img = cap.read()
 
@@ -47,7 +49,7 @@ while True:
         cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 6)
         cv2.putText(img, "paying attention", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 6)
     
-    cur_time = datetime.datetime.now()
+    
     
     if not paying_attention:
         if status == 2:
